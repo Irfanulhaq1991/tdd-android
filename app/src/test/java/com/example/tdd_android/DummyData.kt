@@ -39,9 +39,9 @@ object DummyData {
             }
         """.trimIndent()
     }
-    fun getDummyMoviesList():List<Movie>{
+    fun getDummyMoviesList():MutableList<Movie>{
 
-        return listOf(
+        return mutableListOf(
             Movie("Movie1","This is newly released","https://picsum.photos/id/237/200/300"),
             Movie("Movie1","This is newly released","https://picsum.photos/id/237/200/300"),
             Movie("Movie1","This is newly released","https://picsum.photos/id/237/200/300"),

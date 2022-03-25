@@ -1,8 +1,23 @@
 package com.example.tdd_android
 
-class MoviesRepository(private val inMemMoviesService: InMemMoviesService) {
-    fun fetchMoviesList():UiState {
-       return UiState.Success(inMemMoviesService.fetchMovies())
-    }
+import kotlinx.coroutines.CloseableCoroutineDispatcher
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import java.io.IOException
 
+class MoviesRepository( private val inMemMoviesService: InMemMoviesService) {
+    suspend fun fetchMoviesList(): UiState {
+        return withContext(Dispatchers.IO) { // ship the execution off the main thread
+            try {
+                val result = inMemMoviesService.fetchMovies()
+                if (result.isEmpty())
+                    UiState.EmptyDataError
+                else
+                    UiState.Success(result)
+            } catch (eIo: IOException) {
+                UiState.OutOfinternetError
+            }
+        }
+    }
 }

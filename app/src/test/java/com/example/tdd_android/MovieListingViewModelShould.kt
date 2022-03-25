@@ -1,13 +1,16 @@
 package com.example.tdd_android
 
+import io.mockk.coVerify
 import io.mockk.impl.annotations.RelaxedMockK
 import io.mockk.junit5.MockKExtension
 import io.mockk.verify
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runBlockingTest
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 
-@ExtendWith(MockKExtension::class)
+@ExtendWith(InstantTaskExecutorExtension::class,MockKExtension::class)
  class MovieListingViewModelShould {
 
     @RelaxedMockK
@@ -22,6 +25,6 @@ import org.junit.jupiter.api.extension.ExtendWith
     @Test
     fun loadDataFromRepository() {
         viewModel.fetchMoviesList()
-        verify { movieRepo.fetchMoviesList() }
+        coVerify { movieRepo.fetchMoviesList() }
     }
 }
