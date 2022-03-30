@@ -1,7 +1,5 @@
 package com.example.tdd_android
 
-import kotlinx.coroutines.CloseableCoroutineDispatcher
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.IOException
@@ -16,7 +14,7 @@ class MoviesRepository( private val inMemMoviesService: InMemMoviesService) {
                 else
                     UiState.Success(result)
             } catch (eIo: IOException) {
-                UiState.OutOfinternetError
+                UiState.OutOfInternetError
             }
         }
     }

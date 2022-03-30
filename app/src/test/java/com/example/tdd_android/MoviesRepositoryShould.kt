@@ -3,14 +3,8 @@ package com.example.tdd_android
 
 import com.google.common.truth.Truth.assertThat
 import io.mockk.coEvery
-import io.mockk.every
 import io.mockk.impl.annotations.RelaxedMockK
 import io.mockk.junit5.MockKExtension
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.test.StandardTestDispatcher
-import kotlinx.coroutines.test.TestScope
-import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -54,7 +48,7 @@ class MoviesRepositoryShould {
 
     @Test
     fun returnOutOfInternetError()= runTest {
-        val expected = UiState.OutOfinternetError
+        val expected = UiState.OutOfInternetError
         coEvery { inMemMoviesService.fetchMovies() } throws IOException()
 
         val actual = repo.fetchMoviesList()
