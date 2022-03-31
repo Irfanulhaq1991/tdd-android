@@ -4,7 +4,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.IOException
 
-class MoviesRepository( private val inMemMoviesService: InMemMoviesService) {
+class MoviesRepository( private val inMemMoviesService: IMovieService) {
     suspend fun fetchMoviesList(): UiState {
         return withContext(Dispatchers.IO) { // ship the execution off the main thread
             try {

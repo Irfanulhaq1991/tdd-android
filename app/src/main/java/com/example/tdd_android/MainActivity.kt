@@ -16,9 +16,10 @@ open class MainActivity : AppCompatActivity(), Observer<UiState> {
             viewModelFactory {
                 MovieListingViewModel(
                     MoviesRepository(
-                        InMemMoviesService(
-                            DummyData.getDummyMoviesList()
-                        )
+//                        InMemMoviesService(
+//                            DummyData.getDummyMoviesList()
+//                        )
+                    RemoteMovieService(RemoteApiConfiguration.getRemoteApi(RemoteMovieApi::class.java))
                     )
                 )
             }

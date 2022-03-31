@@ -7,7 +7,7 @@ import retrofit2.Response
 import java.util.concurrent.TimeoutException
 
 
-@Suppress("BlockingMethodInNonBlockingContext") // to suppress false positive  warning
+
 class RemoteMovieService(private val api: RemoteMovieApi) : IMovieService {
     override suspend fun fetchMovies(): List<Movie> {
         return try {
@@ -28,7 +28,6 @@ class RemoteMovieService(private val api: RemoteMovieApi) : IMovieService {
     }
 
     private fun parsAndGetBody(response: Response<ResponseBody>): List<Movie> {
-
         val typToken = object : TypeToken<List<Movie>>() {}.type
         val gson = Gson()
         return gson.fromJson(response.body()!!.string(), typToken)
